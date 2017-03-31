@@ -1,0 +1,8 @@
+
+/* Course Agenda
+* Substitution
+* structural recursion
+* higher order function
+* lists and map
+* algebraic data types and flatmap
+* */
