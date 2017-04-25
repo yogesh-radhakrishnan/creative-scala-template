@@ -13,3 +13,5 @@ object Quentin{
   val color = "Tabby and white"
   val food = "Curry"
 }
+
+
