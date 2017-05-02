@@ -1,14 +1,12 @@
 
-class Director(val firstName: String, val lastName: String, val yearOfBirth: Int) {
-
+case class Director(val firstName: String, val lastName: String, val yearOfBirth: Int) {
   def name = s"$firstName $lastName"
-
 }
 
 object Director {
-  def apply(firstName: String, lastName: String, yearOfBirth: Int) = {
-    new Director(firstName, lastName, yearOfBirth)
-  }
+  //  def apply(firstName: String, lastName: String, yearOfBirth: Int) = {
+  //    new Director(firstName, lastName, yearOfBirth)
+  //  }
 
   def older(dir1: Director, dir2: Director): Director = {
     if (dir1.yearOfBirth >= dir2.yearOfBirth) dir1 else dir2
@@ -16,22 +14,21 @@ object Director {
 }
 
 
-class Film(val name: String, val yearOfRelease: Int, val imdbRating: Double, val director: Director) {
+case class Film(val name: String, val yearOfRelease: Int, val imdbRating: Double, val director: Director) {
 
   def directorAge = yearOfRelease - director.yearOfBirth
 
   def isDirectedBy(dir: Director): Boolean = if (dir.name == director.name) true else false
 
-  def copy(name: String = this.name, yearOfRelease: Int = this.yearOfRelease, imdbRating: Double = this.imdbRating, director: Director = this.director): Film = {
-    new Film(name, yearOfRelease, imdbRating, director)
-  }
-
+  //  def copy(name: String = this.name, yearOfRelease: Int = this.yearOfRelease, imdbRating: Double = this.imdbRating, director: Director = this.director): Film = {
+  //    new Film(name, yearOfRelease, imdbRating, director)
+  //  }
 }
 
 object Film {
-  def apply(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) = {
-    new Film(name, yearOfRelease, imdbRating, director)
-  }
+  //  def apply(name: String, yearOfRelease: Int, imdbRating: Double, director: Director) = {
+  //    new Film(name, yearOfRelease, imdbRating, director)
+  //  }
 
   def highestRating(film1: Film, film2: Film): Film = {
     if (film1.imdbRating >= film2.imdbRating) film1 else film2
@@ -62,9 +59,23 @@ object testFilm {
     val dieHard = new Film("Die Hard", 1988, 8.3, mcTiernan)
     val huntForRedOctober = new Film("The Hunt for Red October", 1990, 7.6, mcTiernan)
     val thomasCrownAffair = new Film("The Thomas Crown Affair", 1999, 6.8, mcTiernan)
-    assert(eastwood.yearOfBirth == 1930) // should be 1930
-    assert(dieHard.director.name == "John McTiernan")
-    assert(invictus.isDirectedBy(nolan) == false)
-    assert(inception.copy().copy().copy() == inception)
+//    assert(eastwood.yearOfBirth == 1930) // should be 1930
+//    assert(dieHard.director.name == "John McTiernan")
+//    assert(invictus.isDirectedBy(nolan) == false)
+//    assert(inception.copy().copy().copy() == inception)
+//
+    println(Dad.rate(unforgiven))
   }
+}
+
+
+object Dad {
+  def rate(film: Film): Double = {
+    film match {
+      case Film(_, _, _, Director("Clint", "Eastwood", _)) => 10.0
+      case Film(_, _, _, Director("John", "McTiernan", _)) => 7.0
+      case _ => 3.0
+    }
+  }
+
 }
